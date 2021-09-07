@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StructureMapTest
@@ -9,17 +6,20 @@ namespace StructureMapTest
     public class Service : IService
     {
         private readonly IRestClient _restClient;
-        public Service(IRestClient restClient, string baseUrl)
+        private readonly string _baseUri;
+        public Service(IRestClient restClient, string baseUri)
         {
             _restClient = restClient;
-            _restClient.BasePath = "basePath";
-            _restClient.BaseUrl = baseUrl;
-            _restClient.AddHeader("key1", "value1");
-            _restClient.AddHeader("key2", "value2");
+            _baseUri = baseUri;
         }
-        public IList<Posts> GetAllPosts()
+        public async Task<IList<Posts>> GetAllPosts()
         {
-            return _restClient.Get<IList<Posts>>("posts");
+            var headers = new List<HeaderDef>
+            {
+                new HeaderDef {Key = "header1", Value = "value1"},
+                new HeaderDef {Key = "header2", Value = "value2"}
+            };
+            return await _restClient.GetAsync<IList<Posts>>(_baseUri, "posts", headers);
         }
     }
 }

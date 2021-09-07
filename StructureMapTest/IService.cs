@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StructureMapTest
 {
     public interface IService
     {
-        IList<Posts> GetAllPosts();
+        Task<IList<Posts>> GetAllPosts();
     }
 }

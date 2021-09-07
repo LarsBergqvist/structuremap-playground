@@ -1,10 +1,10 @@
-﻿namespace StructureMapTest
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace StructureMapTest
 {
     public interface IRestClient
     {
-        TResponse Get<TResponse>(string path);
-        void AddHeader(string key, string value);
-        string BaseUrl { get; set; }
-        string BasePath { get; set; }
+        Task<TResponse> GetAsync<TResponse>(string baseUri, string path, IList<HeaderDef> headers = null);
     }
 }
