@@ -5,6 +5,6 @@ namespace StructureMapTest
 {
     public interface IService
     {
-        Task<IList<Posts>> GetAllPosts();
+        Task<IList<Post>> GetAllPosts();
     }
 }

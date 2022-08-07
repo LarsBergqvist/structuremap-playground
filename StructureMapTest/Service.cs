@@ -12,14 +12,14 @@ namespace StructureMapTest
             _restClient = restClient;
             _baseUri = baseUri;
         }
-        public async Task<IList<Posts>> GetAllPosts()
+        public async Task<IList<Post>> GetAllPosts()
         {
             var headers = new List<HeaderDef>
             {
                 new HeaderDef {Key = "header1", Value = "value1"},
                 new HeaderDef {Key = "header2", Value = "value2"}
             };
-            return await _restClient.GetAsync<IList<Posts>>(_baseUri, "posts", headers);
+            return await _restClient.GetAsync<IList<Post>>(_baseUri, "posts", headers);
         }
     }
 }

@@ -1,12 +1,13 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using StructureMap;
 
 namespace StructureMapTest
 {
-    class Program
+    static class Program
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
             var container = new Container(_ =>
             {
@@ -23,7 +24,15 @@ namespace StructureMapTest
             });
             var service = container.GetInstance<IService>();
             var result = await service.GetAllPosts();
+            foreach (var post in result)
+            {
+                Console.WriteLine(post);
+            }
             var result2 = await service.GetAllPosts();
+            foreach (var post in result2)
+            {
+                Console.WriteLine(post);
+            }
         }
 
     }
